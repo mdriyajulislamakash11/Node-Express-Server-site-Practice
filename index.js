@@ -4,6 +4,7 @@ const app = express()
 const port = 5000
 
 app.use(cors())
+app.use(express.json())
 
 const users = [
   {id: 1, name: "akash", email: " @gmail.com"},
@@ -20,7 +21,13 @@ app.get("/users", (rec, res) => {
   res.send(users)
 });
 
-
+app.post("/users", (rec, res) => {
+  console.log(rec.body)
+  const newUsers = rec.body;
+  newUsers.id = users.length + 1;
+  users.push(newUsers);
+  res.send(newUsers)
+})
 
 
 
